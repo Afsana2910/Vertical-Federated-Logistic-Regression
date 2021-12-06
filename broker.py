@@ -13,11 +13,11 @@ import heart_disease_dataset as hdd
 #number of participants
 num_client=3
 #batch size
-bs = 100
+bs = 1000
 
 
 #Communication Round 
-comm_round = 10
+comm_round = 400
 
 x1,x2,x3=hdd.get_data()
 y=hdd.get_labels()
@@ -42,7 +42,7 @@ def generate_batch_ids(limit=N,n_samples=N,batch_size=bs):
             if counter==batch_size:
                 return ids
 if __name__=="__main__":
-    guest = Guest(0.01,model,data=(x1,y))
+    guest = Guest(0.1,model,data=(x1,y))
     host1 = Host(0.1,model,data=x2)
     host2 = Host(0.1,model,data=x3)
     for r in  tqdm(range(comm_round), desc = 'Communication Round'):
@@ -83,10 +83,12 @@ if __name__=="__main__":
             
             guest.compute_gradient()
 
-            dw,db = guest.send()
-            host1.receive((dw,db))
-            host2.receive((dw,db))
+            
+            host1.receive(guest.send())
+            host2.receive(guest.send())
 
+            host1.compute_gradient()
+            host2.compute_gradient()
             guest.update_model()
             
             host1.update_model()

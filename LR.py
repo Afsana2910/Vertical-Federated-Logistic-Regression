@@ -28,11 +28,11 @@ class model:
         loss = -np.mean(y*(np.log(y_hat)) + (1-y)*np.log(1-y_hat))
         return loss
     
-    def gradients(self,X, y, y_hat):
+    def gradients(self,X, diff):
         # Gradient of loss w.r.t weights.
-        dw = (1/self.m)*np.dot(X.T, (y_hat - y))
+        dw = (1/self.m)*np.dot(X.T, diff)
         # Gradient of loss w.r.t bias.
-        db = (1/self.m)*np.sum((y_hat - y)) 
+        db = (1/self.m)*np.sum(diff) 
         return dw, db
     
     def forward(self,x):
@@ -40,29 +40,35 @@ class model:
         self.x = x
         z = (np.dot(self.x, self.w) + self.b)
         return z
-    
-    def compute_gradient(self,z,y):
+
+    def compute_diff(self,z,y):
         y_hat=self.sigmoid(z)
-        self.dw, self.db = self.gradients(self.x, y, y_hat)
+        diff = y_hat - y
+        return diff
+    
+    def compute_gradient(self,diff):
+        self.dw, self.db = self.gradients(self.x, diff)
         return self.dw,self.db
+
+
+    
   
         
-    def update_model_(self,dw,db,y):
-        self.dw=dw
-        self.db=db
+    def update_model_(self,y):
+        #self.dw=dw
+        #self.db=db
         # Updating the parameters.
         self.w -= self.lr*self.dw
         self.b -= self.lr*self.db
         l = self.loss(y, self.sigmoid(np.dot(self.x, self.w) + self.b))
         return l
-    def update_model(self,dw,db):
-        self.dw=dw
-        self.db=db
+    def update_model(self):
+        #self.dw=dw
+        #self.db=db
         # Updating the parameters.
         self.w -= self.lr*self.dw
         self.b -= self.lr*self.db
         
-    
 
 
     def get_gradients(self):

@@ -8,6 +8,7 @@ class Host(ClientInterface):
         self.x = data
         self.model = model(self.x,self.lr)
         self.z= None
+        self.diff = None
 
     def create_batch(self,ids):
 
@@ -17,16 +18,20 @@ class Host(ClientInterface):
         x=self.create_batch(ids)
         self.z = self.model.forward(x)
 
-    def receive(self,grad):
-        self.dw,self.db=grad
+    def receive(self,diff):
+        #self.dw,self.db=grad
+        self.diff = diff
     
     def send(self):
         return self.z
-    
-    def update_model(self):
-        self.loss = self.model.update_model(self.dw,self.db)
 
     def compute_gradient(self):
-        return 0
+         self.dw,self.db = self.model.compute_gradient(self.diff)
+    
+    def update_model(self):
+
+        self.model.update_model()
+
+    
 
     
