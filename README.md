@@ -1,1 +1,1 @@
-# Vertical-Federated-Learning
+# Vertical Federated Logistic Regression
