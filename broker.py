@@ -1,3 +1,4 @@
+#This script is used for running VFL simulating the interaction among the clients 
 import numpy as np
 import random
 from guest import Guest
