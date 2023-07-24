@@ -1,3 +1,4 @@
+#This is an implementation of the Logistic regression model for use in Vertical Federated Learning
 from typing import overload
 import numpy as np
 from multipledispatch import dispatch
@@ -52,21 +53,17 @@ class model:
 
 
     def update_model_(self,y):
-        #self.dw=dw
-        #self.db=db
         # Updating the parameters.
         self.w -= self.lr*self.dw
         self.b -= self.lr*self.db
         l = self.loss(y, self.sigmoid(np.dot(self.x, self.w) + self.b))
-        return l
+        return l #returns the loss which can be plotted for visualization
+        
     def update_model(self):
-        #self.dw=dw
-        #self.db=db
         # Updating the parameters.
         self.w -= self.lr*self.dw
         self.b -= self.lr*self.db
         
-
 
     def get_gradients(self):
         if (self.dw and self.db) is not None:
