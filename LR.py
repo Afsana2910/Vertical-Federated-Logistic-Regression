@@ -51,9 +51,6 @@ class model:
         return self.dw,self.db
 
 
-    
-  
-        
     def update_model_(self,y):
         #self.dw=dw
         #self.db=db
