@@ -28,21 +28,14 @@ class Guest(ClientInterface):
 
 
         #self.z = self.normalize(self.z)
-        #_z = self.normalize(_z)
-        #self.z = (_z + self.z) / 2
-        #self.z = _z + self.z
-        #self.z = np.mean(_z,self.z)
-        #self.z = self.z + z1 + z2
-        self.z = (0.5*self.z) + (0.25*z1) + (0.25*z2)
-        #self.z = ((0.7*self.z) + (0.15*z1) + (0.15*z2))/3
-        #self.z = (self.z + z1 + z2)/3
-    
+        self.z = self.z + z1 + z2
+       
     def compute_gradient(self):
         self.diff = self.model.compute_diff(self.z,self.y_)
         self.dw,self.db = self.model.compute_gradient(self.diff)
     
     def send(self):
-        #return self.dw,self.db
+        #return self.dw, self.db
         return self.diff
     
     def update_model(self):
