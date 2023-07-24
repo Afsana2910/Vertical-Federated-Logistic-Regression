@@ -1,0 +1,23 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Vertical federated learning
+message: >-
+  Please cite this repository if used for any research
+  purpose
+type: software
+authors:
+  - given-names: Afsana
+    family-names: Khan
+    email: a.khan@maastrichtuniversity.nl
+    affiliation: Maastricht University
+    orcid: 'https://orcid.org/0000-0001-7615-3554'
+repository-code: 'https://github.com/Afsana2910/Vertical-Federated-Learning'
+abstract: >-
+  A simple implementation of Vertically Federated Logistic
+  Regression
+keywords:
+  - vertical federated learning
+  - privacy preserving machine learning
+  - distributed learning
