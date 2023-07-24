@@ -1,5 +1,5 @@
 # Vertical Federated Logistic Regression
-This is a simple implementation of Vertically Federated Logistic Regression applied to a heart disease prediction dataset.
+This is a simple implementation of Vertically Federated Logistic Regression.
 
 ![Algorithm for HFL](VFL_Algorithm.PNG)
 
