@@ -1,3 +1,4 @@
+#This script is used to split the dataset into three partitions vertically
 from os import closerange
 import sklearn
 from sklearn import datasets
