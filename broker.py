@@ -57,17 +57,15 @@ def main():
         loss_per_epoch.append(epoch_loss)
 
     x1_test,x2_test,x3_test = hdd.get_testdata()
-    host1_contribution = host1.compute_contribution(x2_test)
-    host2_contribution = host2.compute_contribution(x3_test)
-
-
-
+    
     predictions_local = guest.predict_local(x1_test)
     print("Local Model Accuracy of Guest: ",accuracy_score(hdd.get_testlabels(),predictions_local))
     print("Local Model F1 Score of Guest: ",f1_score(hdd.get_testlabels(),predictions_local))
     print("Local Report",classification_report(hdd.get_testlabels(),predictions_local))
 
     # The guest receives the contributions and makes the final prediction
+    host1_contribution = host1.compute_contribution(x2_test)
+    host2_contribution = host2.compute_contribution(x3_test)
     predictions = guest.predict(x1_test, [host1_contribution, host2_contribution])
     print("Federated Model Accuracy of Guest: ",accuracy_score(hdd.get_testlabels(),predictions))
     print("Federated Model F1 Score of Guest: ",f1_score(hdd.get_testlabels(),predictions))
